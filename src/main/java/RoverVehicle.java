@@ -6,8 +6,8 @@ public class RoverVehicle {
     private CompassDirection direction;
 
 
-    public RoverVehicle(RoverPosition position, String name) {
-        this.position = position;
+    public RoverVehicle() {
+
     }
 
     public RoverPosition getPosition() {
@@ -22,44 +22,41 @@ public class RoverVehicle {
         return direction;
     }
 
-    public void turnLeft(Instruction left) {
-        switch (direction) {
-            case N:
-                direction = CompassDirection.W;
-                break;
-            case W:
-                direction = CompassDirection.S;
-                break;
-            case S:
-                direction = CompassDirection.E;
-                break;
-            case E:
-                direction = CompassDirection.N;
-                break;
-            default:
-                throw new RuntimeException("Not able to access this location");
-        }
-    }
+    public CompassDirection rotate (CompassDirection direction, Instruction instruction) {
 
-    public void turnRight(Instruction right) {
-        switch (direction) {
-            case N:
-                direction = CompassDirection.E;
-                break;
-            case E:
-                direction = CompassDirection.S;
-                break;
-            case S:
-                direction = CompassDirection.W;
-                break;
-            case W:
-                direction = CompassDirection.N;
-                break;
-            default:
-                throw new RuntimeException("Not able to access this location");
+        if (instruction.equals(Instruction.L)) {
+            switch (direction) {
+                case N:
+                    return CompassDirection.W;
+                case W:
+                    return CompassDirection.S;
+                case S:
+                    return CompassDirection.E;
+                case E:
+                    return CompassDirection.N;
+                default:
+                    throw new RuntimeException("Not able to access this location");
+            }
         }
+        if (instruction.equals(Instruction.R)) {
+            switch (direction) {
+                case N:
+                    return CompassDirection.E;
+                case E:
+                    return CompassDirection.S;
+                case S:
+                    return CompassDirection.W;
+                case W:
+                    return CompassDirection.N;
+                default:
+                    throw new RuntimeException("Not able to access this location");
+            }
+        }
+        return null;
     }
-    public RoverPosition move(CompassDirection direction)
+    public RoverPosition move(CompassDirection direction){
+        return null;
+    };
 }
 
 
