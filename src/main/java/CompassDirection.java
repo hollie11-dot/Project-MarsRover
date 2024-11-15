@@ -3,6 +3,7 @@ public enum CompassDirection {
     S,
     E,
     W
+
 }
 
 
