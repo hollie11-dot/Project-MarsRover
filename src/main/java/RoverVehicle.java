@@ -56,6 +56,7 @@ public class RoverVehicle {
     }
     public RoverPosition move(CompassDirection direction){
         return null;
+
     };
 }
 
