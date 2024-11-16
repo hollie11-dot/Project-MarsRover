@@ -1,63 +1,78 @@
 import static javax.swing.text.html.HTML.Attribute.N;
 
 public class RoverVehicle {
-    private RoverPosition position;
-    private String name;
-    private CompassDirection direction;
 
+    private final RoverPosition position;
+    private final String name;
 
-    public RoverVehicle() {
-
-    }
-
-    public RoverPosition getPosition() {
-        return position;
-    }
-
-    public String getName() {
-        return name;
+    public RoverVehicle(RoverPosition position, String name) {
+        this.position = position;
+        this.name = name;
     }
 
     public CompassDirection getDirection() {
-        return direction;
+        return position.getFacing();
     }
 
-    public CompassDirection rotate (CompassDirection direction, Instruction instruction) {
+    public void interpretInstruction(Instruction instruction) {
+        if (instruction.equals(Instruction.M)) {
+            move(instruction);
+        } else {
+            rotate(instruction);
+        }
+    }
 
+    public void rotate(Instruction instruction) {
         if (instruction.equals(Instruction.L)) {
-            switch (direction) {
+            switch (position.getFacing()) {
                 case N:
-                    return CompassDirection.W;
+                    position.setFacing(CompassDirection.W);
+                    break;
                 case W:
-                    return CompassDirection.S;
+                    position.setFacing(CompassDirection.S);
+                    break;
                 case S:
-                    return CompassDirection.E;
+                    position.setFacing(CompassDirection.E);
+                    break;
                 case E:
-                    return CompassDirection.N;
+                    position.setFacing(CompassDirection.N);
+                    break;
                 default:
                     throw new RuntimeException("Not able to access this location");
             }
         }
+
         if (instruction.equals(Instruction.R)) {
-            switch (direction) {
+            switch (position.getFacing()) {
                 case N:
-                    return CompassDirection.E;
+                    position.setFacing(CompassDirection.E);
+                    break;
                 case E:
-                    return CompassDirection.S;
+                    position.setFacing(CompassDirection.S);
+                    break;
                 case S:
-                    return CompassDirection.W;
+                    position.setFacing(CompassDirection.W);
+                    break;
                 case W:
-                    return CompassDirection.N;
+                    position.setFacing(CompassDirection.N);
+                    break;
                 default:
                     throw new RuntimeException("Not able to access this location");
             }
         }
-        return null;
     }
-    public RoverPosition move(CompassDirection direction){
+
+    public RoverPosition move(Instruction instruction){
+        //N move - y increments. S move - y decrements. E - increments X, W move - decrements X
+        //check bounds
         return null;
 
     };
+
+
+    //method to interpret the instruction - decide whether rotates or moves.
+    //if L or R - rotate() if M - move()
+
 }
 
 
