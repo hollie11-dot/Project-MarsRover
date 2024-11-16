@@ -19,7 +19,7 @@ public class InputParser {
         return validInputs;
     }
 
-    public PlateauSize checkPlateauSize(int height, int width) throws Exception {
+    public PlateauSize checkPlateauSize(int height, int width) {
         if (height < 0 || width < 0) {
             throw new IllegalArgumentException("Cannot be a negative number!");
         }
@@ -41,4 +41,5 @@ public class InputParser {
         }
         return validInputs;
     }
+
 }
