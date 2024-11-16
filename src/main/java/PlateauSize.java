@@ -1,13 +1,18 @@
 public class PlateauSize {
-//    private final int[][] gridSize = new int[5][5];
 
-    public int height;
-    public int width;
+    private int height;
+    private int width;
 
     public PlateauSize(int height, int width){
         this.height = height;
         this.width = width;
     }
 
+    public int getWidth() {
+        return width;
+    }
 
+    public int getHeight() {
+        return height;
+    }
 }
