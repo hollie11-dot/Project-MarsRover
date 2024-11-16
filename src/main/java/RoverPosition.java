@@ -3,6 +3,12 @@ public class RoverPosition {
     private int y;
     private CompassDirection facing;
 
+    public RoverPosition(int x, int y, CompassDirection facing) {
+        this.x = x;
+        this.y = y;
+        this.facing = facing;
+    }
+
     public int getX() {
         return x;
     }
@@ -15,4 +21,7 @@ public class RoverPosition {
         return facing;
     }
 
+    public void setFacing(CompassDirection facing) {
+        this.facing = facing;
+    }
 }
