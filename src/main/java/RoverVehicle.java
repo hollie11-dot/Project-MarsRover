@@ -65,13 +65,11 @@ public class RoverVehicle {
     public RoverPosition move(Instruction instruction){
         //N move - y increments. S move - y decrements. E - increments X, W move - decrements X
         //check bounds
+
         return null;
 
     };
 
-
-    //method to interpret the instruction - decide whether rotates or moves.
-    //if L or R - rotate() if M - move()
 
 }
 
