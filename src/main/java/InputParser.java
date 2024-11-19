@@ -37,7 +37,7 @@ public class InputParser {
                     validInputs.add(CompassDirection.valueOf(String.valueOf(c).toUpperCase()));
                 }
             }
-            else throw new IllegalArgumentException("Not a valid instruction!");
+            else throw new IllegalArgumentException("Not a valid direction!");
         }
         return validInputs;
     }
