@@ -26,7 +26,7 @@ class InputParserTest {
     @DisplayName("Returns Instruction when passed valid input")
     void checkInstructionIfSingleInputValid() {
         InputParser testCase = new InputParser();
-        String[] test = new String[] {"L"};
+        String[] test = new String[]{"L"};
         ArrayList<Instruction> result = testCase.checkInstruction(test);
         ArrayList<Instruction> expectedResult = new ArrayList<>();
         expectedResult.add(Instruction.L);
@@ -37,7 +37,7 @@ class InputParserTest {
     @DisplayName("Returns Instruction when passed valid input")
     void checkInstructionIfMultipleInputValid() {
         InputParser testCase = new InputParser();
-        String[] test = new String[] {"L","r","M"};
+        String[] test = new String[]{"L", "r", "M"};
         ArrayList<Instruction> result = testCase.checkInstruction(test);
         ArrayList<Instruction> expectedResult = new ArrayList<>();
         expectedResult.add(Instruction.L);
@@ -47,6 +47,14 @@ class InputParserTest {
 
     }
 
+    @Test
+    @DisplayName("Returns exception when passed invalid input")
+    void checkInstructionWithInvalidInput() throws Exception {
+        InputParser testCase = new InputParser();
+        String[] test = new String[]{"AbC"};
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> testCase.checkInstruction(test));
+        assertEquals("Not a valid instruction!", exception.getMessage());
+    }
 
     @Test
     @DisplayName("Returns exception when passed negative numbers")
@@ -58,15 +66,15 @@ class InputParserTest {
         assertEquals("Cannot be a negative number!", exception.getMessage());
     }
 
-        @Test
-        @DisplayName("Returns new PlataeuSize when passed valid numbers")
-        void checkPlateuaSizeWithValidNumber() throws Exception {
-            InputParser testCase = new InputParser();
-            int height = 5;
-            int width = 5;
-            PlateauSize result = testCase.checkPlateauSize(height, width);
-            assertEquals(5, result.getHeight());
-            assertEquals(5, result.getWidth());
+    @Test
+    @DisplayName("Returns new PlataeuSize when passed valid numbers")
+    void checkPlateuaSizeWithValidNumber() throws Exception {
+        InputParser testCase = new InputParser();
+        int height = 5;
+        int width = 5;
+        PlateauSize result = testCase.checkPlateauSize(height, width);
+        assertEquals(5, result.getHeight());
+        assertEquals(5, result.getWidth());
     }
 
     @Test
@@ -85,7 +93,7 @@ class InputParserTest {
     @DisplayName("Returns CompassDirection when passed valid input")
     void checkCompassDirectionIfSingleInputValid() {
         InputParser testCase = new InputParser();
-        String[] test = new String[] {"W"};
+        String[] test = new String[]{"W"};
         ArrayList<CompassDirection> result = testCase.checkCompassDirection(test);
         ArrayList<CompassDirection> expectedResult = new ArrayList<>();
         expectedResult.add(CompassDirection.W);
@@ -105,21 +113,30 @@ class InputParserTest {
         assertEquals(expectedResult, result);
     }
 
-        @Test
-        @DisplayName("Returns CompassDirection when passed valid input per string")
-        void checkCompassDirectionIfMultipleInputValidPerString() {
-            InputParser testCase = new InputParser();
-            String[] test = new String[] {"sNE","NE","Ew"};
-            ArrayList<CompassDirection> result = testCase.checkCompassDirection(test);
-            ArrayList<CompassDirection> expectedResult = new ArrayList<>();
-            expectedResult.add(CompassDirection.S);
-            expectedResult.add(CompassDirection.N);
-            expectedResult.add(CompassDirection.E);
-            expectedResult.add(CompassDirection.N);
-            expectedResult.add(CompassDirection.E);
-            expectedResult.add(CompassDirection.E);
-            expectedResult.add(CompassDirection.W);
-            assertEquals(expectedResult, result);
+    @Test
+    @DisplayName("Returns CompassDirection when passed valid input per string")
+    void checkCompassDirectionIfMultipleInputValidPerString() {
+        InputParser testCase = new InputParser();
+        String[] test = new String[]{"sNE", "NE", "Ew"};
+        ArrayList<CompassDirection> result = testCase.checkCompassDirection(test);
+        ArrayList<CompassDirection> expectedResult = new ArrayList<>();
+        expectedResult.add(CompassDirection.S);
+        expectedResult.add(CompassDirection.N);
+        expectedResult.add(CompassDirection.E);
+        expectedResult.add(CompassDirection.N);
+        expectedResult.add(CompassDirection.E);
+        expectedResult.add(CompassDirection.E);
+        expectedResult.add(CompassDirection.W);
+        assertEquals(expectedResult, result);
 
+    }
+
+    @Test
+    @DisplayName("Returns exception when passed invalid input")
+    void checkCompassDirectionWithInvalidInput() throws Exception {
+        InputParser testCase = new InputParser();
+        String[] test = new String[]{"ABCD"};
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> testCase.checkCompassDirection(test));
+        assertEquals("Not a valid direction!", exception.getMessage());
     }
 }
