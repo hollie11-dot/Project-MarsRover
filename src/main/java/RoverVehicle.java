@@ -14,6 +14,14 @@ public class RoverVehicle {
         return position.getFacing();
     }
 
+    public int getXCoordinates(){
+        return position.getX();
+    }
+
+    public int getYCoordinates(){
+        return position.getY();
+    }
+
     public void interpretInstruction(Instruction instruction) {
         if (instruction.equals(Instruction.M)) {
             move(instruction);
@@ -62,15 +70,24 @@ public class RoverVehicle {
         }
     }
 
-    public RoverPosition move(Instruction instruction){
-        //N move - y increments. S move - y decrements. E - increments X, W move - decrements X
-        //check bounds
-
-        return null;
-
-    };
-
-
+    public void move(Instruction instruction) {
+        switch (position.getFacing()) {
+            case N:
+                position.setY(position.getY() + 1);
+                break;
+            case E:
+                position.setX(position.getX() +1);
+                break;
+            case S:
+                position.setY(position.getY() -1);
+                break;
+            case W:
+                position.setX(position.getX() -1);
+                break;
+            default:
+                throw new RuntimeException("Unable to get to this location");
+        }
+    }
 }
 
 
