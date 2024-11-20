@@ -24,4 +24,12 @@ public class RoverPosition {
     public void setFacing(CompassDirection facing) {
         this.facing = facing;
     }
+
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    public void setY(int y) {
+        this.y = y;
+    }
 }
