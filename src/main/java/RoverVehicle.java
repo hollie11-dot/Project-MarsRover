@@ -22,9 +22,9 @@ public class RoverVehicle {
         return position.getY();
     }
 
-    public void interpretInstruction(Instruction instruction) {
+    public void interpretInstruction(Instruction instruction, PlateauSize plateauSize) {
         if (instruction.equals(Instruction.M)) {
-            move(instruction);
+            move(plateauSize);
         } else {
             rotate(instruction);
         }
@@ -70,7 +70,15 @@ public class RoverVehicle {
         }
     }
 
-    public void move(Instruction instruction) {
+
+    public void move(PlateauSize plateauSize) {
+        if (position.getFacing().equals(CompassDirection.N) && position.getY() >= plateauSize.getHeight() ||
+            position.getFacing().equals(CompassDirection.E) && position.getX() >= plateauSize.getWidth() ||
+            position.getFacing().equals(CompassDirection.S) && position.getY() <= 0||
+            position.getFacing().equals(CompassDirection.W) && position.getX() <= 0) {
+            throw new IllegalArgumentException("Movement to this location is out of bounds");
+        }
+
         switch (position.getFacing()) {
             case N:
                 position.setY(position.getY() + 1);
@@ -84,10 +92,9 @@ public class RoverVehicle {
             case W:
                 position.setX(position.getX() -1);
                 break;
-            default:
-                throw new RuntimeException("Unable to get to this location");
+            }
         }
     }
-}
+
 
 

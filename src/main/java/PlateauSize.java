@@ -15,4 +15,8 @@ public class PlateauSize {
     public int getHeight() {
         return height;
     }
+
+    public boolean checkIsWithinBoundary(RoverPosition position){
+        return (position.getY() >=0 && position.getY() < height) && (position.getX() >= 0 && position.getX() < width);
+    }
 }
