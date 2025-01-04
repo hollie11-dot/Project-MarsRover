@@ -22,6 +22,14 @@ public class RoverVehicle {
         return position.getY();
     }
 
+    public RoverPosition getPosition(){
+        return position;
+    }
+
+    public boolean hasPosition(RoverPosition positions){
+        return position.equals(positions);
+    }
+
     public void interpretInstruction(Instruction instruction, PlateauSize plateauSize) {
         if (instruction.equals(Instruction.M)) {
             move(plateauSize);
