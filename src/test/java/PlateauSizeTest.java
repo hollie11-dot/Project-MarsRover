@@ -1,7 +1,10 @@
+import org.example.direction.CompassDirection;
+import org.example.plateau.PlateauSize;
+import org.example.rover.RoverPosition;
+import org.example.rover.RoverVehicle;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;

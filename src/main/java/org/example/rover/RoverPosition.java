@@ -1,3 +1,5 @@
+import org.example.direction.CompassDirection;
+
 public class RoverPosition {
     private int x;
     private int y;
