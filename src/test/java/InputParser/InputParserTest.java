@@ -1,9 +1,13 @@
+package InputParser;
+
+import org.example.direction.CompassDirection;
+import org.example.inputparser.InputParser;
+import org.example.instruction.Instruction;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
-import java.util.InputMismatchException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -56,26 +60,7 @@ class InputParserTest {
         assertEquals("Not a valid instruction!", exception.getMessage());
     }
 
-    @Test
-    @DisplayName("Returns exception when passed negative numbers")
-    void checkPlateauSizeWithNegativeNumber() throws Exception {
-        InputParser testCase = new InputParser();
-        int height = -1;
-        int width = 5;
-        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> testCase.checkPlateauSize(height, width));
-        assertEquals("Cannot be a negative number!", exception.getMessage());
-    }
 
-    @Test
-    @DisplayName("Returns new PlataeuSize when passed valid numbers")
-    void checkPlateuaSizeWithValidNumber() throws Exception {
-        InputParser testCase = new InputParser();
-        int height = 5;
-        int width = 5;
-        PlateauSize result = testCase.checkPlateauSize(height, width);
-        assertEquals(5, result.getHeight());
-        assertEquals(5, result.getWidth());
-    }
 
     @Test
     @DisplayName("Returns null if passed an empty string")

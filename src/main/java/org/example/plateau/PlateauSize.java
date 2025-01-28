@@ -1,23 +1,28 @@
+package org.example.plateau;
+
+import org.example.rover.RoverPosition;
+import org.example.rover.RoverVehicle;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class PlateauSize {
 
-    private int height;
-    private int width;
+    private int coordinateX;
+    private int coordinateY;
     private List<RoverVehicle> roverVehicleList = new ArrayList<>();
 
-    public PlateauSize(int height, int width) {
-        this.height = height;
-        this.width = width;
+    public PlateauSize(int coordinateX, int coordinateY) {
+        this.coordinateX = coordinateX;
+        this.coordinateY = coordinateY;
     }
 
-    public int getWidth() {
-        return width;
+    public int getCoordinateY() {
+        return coordinateY;
     }
 
-    public int getHeight() {
-        return height;
+    public int getCoordinateX() {
+        return coordinateX;
     }
 
     public List<RoverVehicle> getRoverVehicleList(){
@@ -25,7 +30,7 @@ public class PlateauSize {
     }
 
     public boolean checkIsWithinBoundary(RoverPosition position) {
-        return (position.getY() >= 0 && position.getY() < height) && (position.getX() >= 0 && position.getX() < width);
+        return (position.getY() >= 0 && position.getY() < coordinateY) && (position.getX() >= 0 && position.getX() < coordinateX);
     }
 
     public boolean isOccupied(RoverVehicle roverVehicle){

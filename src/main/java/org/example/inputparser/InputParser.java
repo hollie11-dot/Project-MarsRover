@@ -1,5 +1,10 @@
+package org.example.inputparser;
+
+import org.example.direction.CompassDirection;
+import org.example.instruction.Instruction;
+import org.example.plateau.PlateauSize;
+
 import java.util.ArrayList;
-import java.util.InputMismatchException;
 
 public class InputParser {
 
@@ -19,12 +24,7 @@ public class InputParser {
         return validInputs;
     }
 
-    public PlateauSize checkPlateauSize(int height, int width) {
-        if (height < 0 || width < 0) {
-            throw new IllegalArgumentException("Cannot be a negative number!");
-        }
-        return new PlateauSize(height, width);
-    }
+
 
     public ArrayList<CompassDirection> checkCompassDirection(String[] input){
         if (input.length ==0){

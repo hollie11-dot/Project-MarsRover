@@ -1,5 +1,8 @@
+package org.example.rover;
+
 import org.example.direction.CompassDirection;
 import org.example.instruction.Instruction;
+import org.example.plateau.PlateauSize;
 
 public class RoverVehicle {
 
@@ -81,8 +84,8 @@ public class RoverVehicle {
 
 
     public void move(PlateauSize plateauSize) {
-        if (position.getFacing().equals(CompassDirection.N) && position.getY() >= plateauSize.getHeight() ||
-            position.getFacing().equals(CompassDirection.E) && position.getX() >= plateauSize.getWidth() ||
+        if (position.getFacing().equals(CompassDirection.N) && position.getY() >= plateauSize.getCoordinateY() ||
+            position.getFacing().equals(CompassDirection.E) && position.getX() >= plateauSize.getCoordinateX() ||
             position.getFacing().equals(CompassDirection.S) && position.getY() <= 0||
             position.getFacing().equals(CompassDirection.W) && position.getX() <= 0) {
             throw new IllegalArgumentException("Movement to this location is out of bounds");

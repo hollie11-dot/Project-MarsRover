@@ -1,3 +1,5 @@
+package org.example.rover;
+
 import org.example.direction.CompassDirection;
 
 public class RoverPosition {
