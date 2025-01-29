@@ -67,9 +67,33 @@ class InstructionParserTest {
     }
 
     @Test
+    @DisplayName("Returns Instruction when passed valid input")
+    void checkInstructionIfMultipleInputsValid() {
+        String input = "L,R,M,M,R,L,M";
+        ArrayList<Instruction> result = testCase.checkInstructionInputs(input);
+        ArrayList<Instruction> expectedResult = new ArrayList<>();
+        expectedResult.add(Instruction.L);
+        expectedResult.add(Instruction.R);
+        expectedResult.add(Instruction.M);
+        expectedResult.add(Instruction.M);
+        expectedResult.add(Instruction.R);
+        expectedResult.add(Instruction.L);
+        expectedResult.add(Instruction.M);
+        assertEquals(expectedResult, result);
+    }
+
+    @Test
     @DisplayName("Returns exception when passed invalid input")
     void checkInstructionWithInvalidInput() throws Exception {
         String input = "AbC";
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> testCase.checkInstructionInputs(input));
+        assertEquals("Not a valid instruction! Please only enter instructions as 'L,R,M'.", exception.getMessage());
+    }
+
+    @Test
+    @DisplayName("Returns exception when passed invalid inputs")
+    void checkInstructionWithInvalidInputs() throws Exception {
+        String input = "LRMlrM";
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> testCase.checkInstructionInputs(input));
         assertEquals("Not a valid instruction! Please only enter instructions as 'L,R,M'.", exception.getMessage());
     }
