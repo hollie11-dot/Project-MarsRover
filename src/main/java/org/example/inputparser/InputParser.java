@@ -25,30 +25,11 @@ public class InputParser {
         }
         try{
             CompassDirection facing = CompassDirection.valueOf(roverPosition[2]);
-            RoverPosition rover = new RoverPosition(x,y,facing);
-            System.out.println(rover.getX());
-            System.out.println(rover.getY());
-            System.out.println(rover.getFacing());
-            return rover;
+            return new RoverPosition(x,y,facing);
+
         } catch (IllegalArgumentException e){
             throw new IllegalArgumentException("Please enter direction facing as 'N,S,E,W'.");
         }
-    }
-
-    public ArrayList<Instruction> checkInstruction(String[] input){
-        if (input.length ==0){
-            return null;
-        }
-        ArrayList<Instruction> validInputs= new ArrayList<>();
-        for (String value: input){
-            if (value.matches("[LlRrMm]+")) {
-                for (char c : value.toCharArray()) {
-                    validInputs.add(Instruction.valueOf(String.valueOf(c).toUpperCase()));
-                }
-            }
-            else throw new IllegalArgumentException("Not a valid instruction!");
-        }
-        return validInputs;
     }
 
 }
