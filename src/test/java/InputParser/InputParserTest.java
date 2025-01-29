@@ -2,126 +2,75 @@ package InputParser;
 
 import org.example.direction.CompassDirection;
 import org.example.inputparser.InputParser;
-import org.example.instruction.Instruction;
+import org.example.rover.RoverPosition;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
-
-import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-@Nested
-class InputParserTest {
+public class InputParserTest {
 
-    @Test
-    @DisplayName("Returns null if passed an empty string")
-    void checkInstructionIfStringEmpty() {
-        //Arrange
-        InputParser testCase = new InputParser();
-        String[] test = new String[0];
-        //Act
-        ArrayList<Instruction> result = testCase.checkInstruction(test);
-        //Assert
-        assertNull(result);
+    private InputParser testCase;
+
+    @BeforeEach
+    public void setUpTestCase(){
+        testCase = new InputParser();
     }
 
     @Test
-    @DisplayName("Returns Instruction when passed valid input")
-    void checkInstructionIfSingleInputValid() {
-        InputParser testCase = new InputParser();
-        String[] test = new String[]{"L"};
-        ArrayList<Instruction> result = testCase.checkInstruction(test);
-        ArrayList<Instruction> expectedResult = new ArrayList<>();
-        expectedResult.add(Instruction.L);
-        assertEquals(expectedResult, result);
+    @DisplayName("Returns IllegalArgumentException when passed an empty String as an input")
+    public void checkInputIfStringEmpty() {
+        String input = "";
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> testCase.validateInitialPosition(input));
+        assertEquals("Invalid input. Please try again", exception.getMessage());
+        System.out.println(exception.getMessage());
     }
 
     @Test
-    @DisplayName("Returns Instruction when passed valid input")
-    void checkInstructionIfMultipleInputValid() {
-        InputParser testCase = new InputParser();
-        String[] test = new String[]{"L", "r", "M"};
-        ArrayList<Instruction> result = testCase.checkInstruction(test);
-        ArrayList<Instruction> expectedResult = new ArrayList<>();
-        expectedResult.add(Instruction.L);
-        expectedResult.add(Instruction.R);
-        expectedResult.add(Instruction.M);
-        assertEquals(expectedResult, result);
-
+    @DisplayName("Returns IllegalArgumentException when passed null String as an input")
+    public void checkInputIfStringNull() {
+        String input = null;
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> testCase.validateInitialPosition(input));
+        assertEquals("Invalid input. Please try again", exception.getMessage());
+        System.out.println(exception.getMessage());
     }
 
     @Test
-    @DisplayName("Returns exception when passed invalid input")
-    void checkInstructionWithInvalidInput() throws Exception {
-        InputParser testCase = new InputParser();
-        String[] test = new String[]{"AbC"};
-        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> testCase.checkInstruction(test));
-        assertEquals("Not a valid instruction!", exception.getMessage());
-    }
-
-
-
-    @Test
-    @DisplayName("Returns null if passed an empty string")
-    void checkCompassDirectionIfStringEmpty() {
-        //Arrange
-        InputParser testCase = new InputParser();
-        String[] test = new String[0];
-        //Act
-        ArrayList<CompassDirection> result = testCase.checkCompassDirection(test);
-        //Assert
-        assertNull(result);
+    @DisplayName("Returns IllegalArgumentException when passed an input of a length not equal to three")
+    public void checkInputIfStringIncorrectLength(){
+        String input = "1, 2, 3, 4";
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> testCase.validateInitialPosition(input));
+        assertEquals("Incorrect format. Please enter landing position in the following format: '1,2,N'.", exception.getMessage());
+        System.out.println(exception.getMessage());
     }
 
     @Test
-    @DisplayName("Returns CompassDirection when passed valid input")
-    void checkCompassDirectionIfSingleInputValid() {
-        InputParser testCase = new InputParser();
-        String[] test = new String[]{"W"};
-        ArrayList<CompassDirection> result = testCase.checkCompassDirection(test);
-        ArrayList<CompassDirection> expectedResult = new ArrayList<>();
-        expectedResult.add(CompassDirection.W);
-        assertEquals(expectedResult, result);
+    @DisplayName("Returns IllegalArgumentException when passed a negative co-ordinate")
+    public void checkInputWithNegativeCoordinate(){
+        String input = "1, -2, N";
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> testCase.validateInitialPosition(input));
+        assertEquals("Co-ordinates cannot be a negative number! Please re-enter.", exception.getMessage());
+        System.out.println(exception.getMessage());
     }
 
     @Test
-    @DisplayName("Returns CompassDirection when passed valid input")
-    void checkCompassDirectionIfMultipleInputValid() {
-        InputParser testCase = new InputParser();
-        String[] test = new String[]{"s", "N", "E"};
-        ArrayList<CompassDirection> result = testCase.checkCompassDirection(test);
-        ArrayList<CompassDirection> expectedResult = new ArrayList<>();
-        expectedResult.add(CompassDirection.S);
-        expectedResult.add(CompassDirection.N);
-        expectedResult.add(CompassDirection.E);
-        assertEquals(expectedResult, result);
+    @DisplayName("Returns IllegalArgumentException when passed an incorrect input for direction")
+    public void checkInputWithIncorrectDirection(){
+        String input = "1, 2, T";
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> testCase.validateInitialPosition(input));
+        assertEquals("Please enter direction facing as 'N,S,E,W'.", exception.getMessage());
+        System.out.println(exception.getMessage());
     }
 
     @Test
-    @DisplayName("Returns CompassDirection when passed valid input per string")
-    void checkCompassDirectionIfMultipleInputValidPerString() {
-        InputParser testCase = new InputParser();
-        String[] test = new String[]{"sNE", "NE", "Ew"};
-        ArrayList<CompassDirection> result = testCase.checkCompassDirection(test);
-        ArrayList<CompassDirection> expectedResult = new ArrayList<>();
-        expectedResult.add(CompassDirection.S);
-        expectedResult.add(CompassDirection.N);
-        expectedResult.add(CompassDirection.E);
-        expectedResult.add(CompassDirection.N);
-        expectedResult.add(CompassDirection.E);
-        expectedResult.add(CompassDirection.E);
-        expectedResult.add(CompassDirection.W);
-        assertEquals(expectedResult, result);
-
+    @DisplayName("Returns new RoverPosition when passed correct inputs")
+    public void checkInputWithCorrectInputs(){
+        String input = "1, 2, N";
+        RoverPosition result = testCase.validateInitialPosition(input);
+        assertEquals(1, result.getX());
+        assertEquals(2, result.getY());
+        assertEquals(CompassDirection.N, result.getFacing());
     }
 
-    @Test
-    @DisplayName("Returns exception when passed invalid input")
-    void checkCompassDirectionWithInvalidInput() throws Exception {
-        InputParser testCase = new InputParser();
-        String[] test = new String[]{"ABCD"};
-        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> testCase.checkCompassDirection(test));
-        assertEquals("Not a valid direction!", exception.getMessage());
-    }
 }
