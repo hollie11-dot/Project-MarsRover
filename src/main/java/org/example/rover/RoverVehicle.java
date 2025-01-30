@@ -4,6 +4,8 @@ import org.example.direction.CompassDirection;
 import org.example.instruction.Instruction;
 import org.example.plateau.PlateauSize;
 
+import java.util.List;
+
 public class RoverVehicle {
 
     private final RoverPosition position;
@@ -30,16 +32,15 @@ public class RoverVehicle {
         return position;
     }
 
-    public boolean hasPosition(RoverPosition positions){
-        return position.equals(positions);
-    }
-
-    public void interpretInstruction(Instruction instruction, PlateauSize plateauSize) {
-        if (instruction.equals(Instruction.M)) {
-            move(plateauSize);
-        } else {
-            rotate(instruction);
+    public void interpretInstruction(List<Instruction> instruction, PlateauSize plateauSize) {
+        for (Instruction i : instruction) {
+            if (i.equals(Instruction.M)) {
+                move(plateauSize);
+            } else {
+                rotate(i);
+            }
         }
+        System.out.println("Rover has successfully landed at: " + this.position.toString());
     }
 
     public void rotate(Instruction instruction) {
