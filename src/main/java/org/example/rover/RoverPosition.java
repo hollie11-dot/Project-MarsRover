@@ -36,4 +36,13 @@ public class RoverPosition {
     public void setY(int y) {
         this.y = y;
     }
+
+    @Override
+    public String toString() {
+        return "RoverPosition{" +
+                "x=" + x +
+                ", y=" + y +
+                ", facing=" + facing +
+                '}';
+    }
 }
