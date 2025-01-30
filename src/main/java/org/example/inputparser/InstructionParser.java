@@ -13,7 +13,7 @@ public class InstructionParser {
         if (input == null || input.isEmpty()) {
             throw new IllegalArgumentException("Invalid input. Please try again");
         }
-        String[] inputs = input.split(",");
+        String[] inputs = input.split("");
         ArrayList<Instruction> validInputs = new ArrayList<>();
         for (String value : inputs) {
             if(value.matches("[LRM]+")) {

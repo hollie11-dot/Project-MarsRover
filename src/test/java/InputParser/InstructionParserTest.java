@@ -56,7 +56,7 @@ class InstructionParserTest {
     @Test
     @DisplayName("Returns Instruction when passed valid input")
     void checkInstructionIfMultipleInputValid() {
-        String input = "L,R,M";
+        String input = "LRM";
         ArrayList<Instruction> result = testCase.checkInstructionInputs(input);
         ArrayList<Instruction> expectedResult = new ArrayList<>();
         expectedResult.add(Instruction.L);
@@ -69,7 +69,7 @@ class InstructionParserTest {
     @Test
     @DisplayName("Returns Instruction when passed valid input")
     void checkInstructionIfMultipleInputsValid() {
-        String input = "L,R,M,M,R,L,M";
+        String input = "LRMMRLM";
         ArrayList<Instruction> result = testCase.checkInstructionInputs(input);
         ArrayList<Instruction> expectedResult = new ArrayList<>();
         expectedResult.add(Instruction.L);
