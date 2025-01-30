@@ -33,9 +33,9 @@ public class PlateauSize {
         return (position.getY() >= 0 && position.getY() < coordinateY) && (position.getX() >= 0 && position.getX() < coordinateX);
     }
 
-    public boolean isOccupied(RoverVehicle roverVehicle){
+    public boolean isOccupied(RoverPosition roverPosition){
         return roverVehicleList.stream()
-        .anyMatch(roverVehicle1 -> roverVehicle.hasPosition(roverVehicle.getPosition()));
+        .anyMatch(roverVehicle -> roverVehicle.getPosition().equals(roverPosition));
         }
 
 
@@ -43,7 +43,7 @@ public class PlateauSize {
         if(!checkIsWithinBoundary(roverVehicle.getPosition())){
         throw new IllegalArgumentException("Rover is not within plateau bounds. Unable to land here");
         }
-        if(isOccupied(roverVehicle)){
+        if(isOccupied(roverVehicle.getPosition())){
         throw new IllegalArgumentException("There is a Rover at this position. Unable to land here");
         }
         roverVehicleList.add(roverVehicle);
