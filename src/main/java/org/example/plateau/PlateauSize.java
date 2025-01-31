@@ -10,7 +10,7 @@ public class PlateauSize {
 
     private int coordinateX;
     private int coordinateY;
-    private List<RoverVehicle> roverVehicleList = new ArrayList<>();
+    private final List<RoverVehicle> roverVehicleList = new ArrayList<>();
 
     public PlateauSize(int coordinateX, int coordinateY) {
         this.coordinateX = coordinateX;
@@ -25,18 +25,16 @@ public class PlateauSize {
         return coordinateX;
     }
 
-    public List<RoverVehicle> getRoverVehicleList(){
-        return roverVehicleList;
-    }
 
     public boolean checkIsWithinBoundary(RoverPosition position) {
         return (position.getY() >= 0 && position.getY() < coordinateY) && (position.getX() >= 0 && position.getX() < coordinateX);
     }
 
-    public boolean isOccupied(RoverPosition roverPosition){
-        return roverVehicleList.stream()
-        .anyMatch(roverVehicle -> roverVehicle.getPosition().equals(roverPosition));
-        }
+    public boolean isOccupied(RoverPosition roverPosition) {
+        boolean b = this.roverVehicleList.stream()
+                .anyMatch(roverVehicle -> roverVehicle.hasPosition(roverPosition));
+        return b;
+    }
 
 
     public void addRover(RoverVehicle roverVehicle) {

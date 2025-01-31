@@ -49,14 +49,12 @@ public class Main {
                 String instructions = scanner.nextLine();
                 List<Instruction> parsedInstructions = instructionParser.checkInstructionInputs(instructions);
                 roverVehicle.interpretInstruction(parsedInstructions, plateauSize);
+                System.out.println("Rover '" + roverVehicle.getName() + "', is now at position " + roverPosition.getX() + "," + roverPosition.getY() + "," + roverPosition.getFacing().toString());
                 break;
             } catch (Exception e) {
                 System.out.println(e.getMessage());
             }
-        }
-
-                //Ask user to enter instructions
-                //Return output of where rover is
+        } scanner.close();
             }
         }
 
